@@ -23,7 +23,7 @@ let passport = require('passport');
 let errorHandler = require("./error-handler");
 
 
-//Database setup
+//Database 
 let mongoose = require('mongoose');
 let dbURI = require('./db');
 
