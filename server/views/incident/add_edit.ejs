@@ -1,0 +1,324 @@
+<!--
+  Student ID: 301145757 , 301143620 , 301173877 , 301178658 , 301182897 , 300977318
+  Web App Name: Runtime
+  Description: An Incident Management Application
+-->
+
+<%- include ../partials/header.ejs %>
+
+<!-- Content for the Add_Edit page -->
+<div class="container mb-4">
+    <div class="row">
+        <div class="offset-md-3 col-md-6">
+            <h1 class="text-center pb-3"><%= title %></h1>
+
+            <form class="form" method="POST">
+                <div class="form-group">
+                    <% if (title == "Edit Incident Report") { %>
+                        <label for="RecordNumbertextField" class="labelList">Record Number</label>
+                        <input type="text" class="form-control" id="RecordNumbertextField" name="RecordNumber"
+                        value="<%= incident.RecordNumber %>" disabled readonly>
+                    <% } %>
+                </div>
+
+                <div class="form-group mt-3">
+                    <input type="hidden"
+                        name="id"
+                        value="<%= incident._id %>"
+                    >
+                    <label for="requestTextField">Requester Name</label>
+                    <% if (title == "Edit Incident Report") { %>
+                        <input type="text" class="form-control"
+                        id="requestTextField"
+                        name="RequesterName" 
+                        value="<%= incident.RequesterName %>"
+                        disabled readonly>
+                    <% } else { %>
+                        <input type="text" class="form-control"
+                        id="requestTextField"
+                        placeholder="First and last name."
+                        name="RequesterName" 
+                        value="<%= incident.RequesterName %>"
+                        required>
+                    <% } %>            
+                </div>
+
+                <div class="form-group mt-3">
+                    <% if (title == "Edit Incident Report") { %>
+                        <label for="statTextField">Status</label>
+                        <% if (incident.Status == 'Closed') { %>
+                            <input type="text" class="form-control" id="statTextField" name="Status"
+                            value="<%= incident.Status %>" disabled readonly>
+                        <% } else { %>
+                            <% if (incident.Status == 'New') { %>
+                                <select class="form-select" id="statTextField" name="Status" required>
+                                    <option value="<%= incident.Status %>" selected><%= incident.Status %></option>
+                                    <option value="Assigned">Assigned</option>
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="On Hold">On Hold</option>
+                                    <option value="Resolved">Resolved</option>
+                                    <option value="Closed">Closed</option>
+                                </select>
+                            <% } else if (incident.Status == 'Assigned') { %>
+                                <select class="form-select" id="statTextField" name="Status" required>
+                                    <option value="<%= incident.Status %>" selected><%= incident.Status %></option>
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="On Hold">On Hold</option>
+                                    <option value="Resolved">Resolved</option>
+                                    <option value="Closed">Closed</option>
+                                </select>
+                            <% } else if (incident.Status == 'In Progress') { %>
+                                <select class="form-select" id="statTextField" name="Status" required>
+                                    <option value="<%= incident.Status %>" selected><%= incident.Status %></option>
+                                    <option value="Assigned">Assigned</option>
+                                    <option value="On Hold">On Hold</option>
+                                    <option value="Resolved">Resolved</option>
+                                    <option value="Closed">Closed</option>
+                                </select>
+                            <% } else if (incident.Status == 'On Hold') { %>
+                                <select class="form-select" id="statTextField" name="Status" required>
+                                    <option value="<%= incident.Status %>" selected><%= incident.Status %></option>
+                                    <option value="Assigned">Assigned</option>
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="Resolved">Resolved</option>
+                                    <option value="Closed">Closed</option>
+                                </select>
+                            <% } else if (incident.Status == 'Resolved') { %>
+                                <select class="form-select" id="statTextField" name="Status" required>
+                                    <option value="<%= incident.Status %>" selected><%= incident.Status %></option>
+                                    <option value="Assigned">Assigned</option>
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="On Hold">On Hold</option>
+                                    <option value="Closed">Closed</option>
+                                </select>
+                            <% } else { %>
+                                <select class="form-select" id="statTextField" name="Status">
+                                    <option value="<%= incident.Status %>" selected><%= incident.Status %></option>
+                                    <option value="Assigned">Assigned</option>
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="On Hold">On Hold</option>
+                                    <option value="Resolved">Resolved</option>
+                                </select>
+                            <% } %>                
+                        <% } %>
+                    <% } else { %>
+                        <label for="statTextField">Status</label>
+                        <input type="text" class="form-control"
+                        id="statTextField"
+                        name="Status" 
+                        value="New"
+                        disabled readonly>
+                    <% } %>     
+                </div>
+
+                <div class="form-group mt-3" id="showResolutionField" style="display:none;">
+                    <label for="rsltnTextField" class="col-lg-2 control-label">Resolution</label>
+                    <textarea class="form-control" id="rsltnTextField" rows="3" name="Resolution" value="<%= incident.Resolution %>" placeholder="Incident resolution field must be entered before this ticket can be officially closed."></textarea>  
+                </div>
+                
+                <div class="form-group mt-3">
+                    <label for="descTextField">Description</label>
+                    <% if (title == "Edit Incident Report") { %>
+                        <% if (incident.Status == 'Closed') { %>
+                            <input type="text" class="form-control" id="descTextField" name="Description"
+                            value="<%= incident.Description %>" disabled readonly>
+                        <% } else { %>
+                            <input type="text" class="form-control"
+                            id="descTextField"
+                            placeholder="Enter the incident description."
+                            name="Description" 
+                            value="<%= incident.Description %>"
+                            required>            
+                        <% } %>
+                    <% } else { %>
+                        <input type="text" class="form-control"
+                        id="descTextField"
+                        placeholder="Enter the incident description."
+                        name="Description" 
+                        value="<%= incident.Description %>"
+                        required>
+                    <% } %>  
+                </div>
+                
+                <div class="form-group mt-3">
+                    <% if (title == "Edit Incident Report") { %>
+                        <% if (incident.Status == 'Closed') { %>
+                            <label for="narTextField" class="col-lg-2 control-label">Narrative</label>
+                            <textarea class="form-control" id="narTextField" rows="3" name="Narrative" value="<%= incident.Narrative %>" disabled readonly><%= incident.Narrative %></textarea>    
+                        <% } else { %>
+                            <label for="narTextField" class="col-lg-2 control-label">Narrative</label>
+                            <textarea class="form-control" id="narTextField" rows="3" name="Narrative" value="<%= incident.Narrative %>" required><%= incident.Narrative %></textarea>    
+                        <% } %>
+                        <% } else { %>
+                        <label for="narTextField" class="col-lg-2 control-label">Narrative</label>
+                        <textarea class="form-control" id="narTextField" rows="3" placeholder="Enter the incident narrative." name="Narrative" required></textarea>
+                    <% } %>     
+                </div>
+                
+                <div class="form-group mt-3">
+                    <% if (title == "Edit Incident Report") { %>
+                        <label for="priorityTextField">Priority</label>
+                        <% if (incident.Status == 'Closed') { %>
+                            <input type="text" class="form-control" id="priorityTextField" name="Priority"
+                            value="<%= incident.Priority %>" disabled readonly>
+                        <% } else { %>
+                            <% if (incident.Priority == 'Low') { %>
+                                <select class="form-select" id="priorityTextField" name="Priority" required>
+                                    <option value="<%= incident.Priority %>" selected><%= incident.Priority %></option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="High">High</option>
+                                </select>
+                            <% } else if (incident.Priority == 'Medium') { %>
+                                <select class="form-select" id="priorityTextField" name="Priority" required>
+                                    <option value="<%= incident.Priority %>" selected><%= incident.Priority %></option>
+                                    <option value="Low">Low</option>
+                                    <option value="High">High</option>
+                                </select>
+                            <% } else { %>
+                                <select class="form-select" id="priorityTextField" name="Priority" required>
+                                    <option value="<%= incident.Priority %>" selected><%= incident.Priority %></option>
+                                    <option value="Low">Low</option>
+                                    <option value="Medium">Medium</option>
+                                </select>
+                            <% } %>
+                        <% } %>
+                    <% } else { %>
+                        <label for="priorityTextField">Priority</label>
+                        <select class="form-select" id="priorityTextField" name="Priority" required>
+                            <option value="Low" selected>--Open to select priority--</option>
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                        </select>
+                    <% } %>     
+                </div>
+                
+                <div class="form-group mt-3">
+                    <% if (title == "Edit Incident Report") { %>
+                        <label for="techTextField">Technician</label>
+                        <% if (incident.Status == 'Closed') { %>
+                            <input type="text" class="form-control" id="techTextField" name="Technician"
+                            value="<%= incident.Technician %>" disabled readonly>
+                        <% } else { %>
+                            <% if (incident.Technician == 'Unassigned') { %>
+                                <select class="form-select" id="techTextField" name="Technician" required>
+                                    <option value="<%= incident.Technician %>" selected><%= incident.Technician %></option>
+                                    <option value="Lana Reyes">Lana Reyes</option>
+                                    <option value="James Archer">James Archer</option>
+                                    <option value="Aparna Ragavan">Aparna Ragavan</option>
+                                    <option value="Robert Lee">Robert Lee</option>
+                                    <option value="Stephen Nelson">Stephen Nelson</option>
+                                </select>
+                            <% } else if (incident.Technician == 'Lana Reyes') { %>
+                                <select class="form-select" id="techTextField" name="Technician" required>
+                                    <option value="<%= incident.Technician %>" selected><%= incident.Technician %></option>
+                                    <option value="James Archer">James Archer</option>
+                                    <option value="Aparna Ragavan">Aparna Ragavan</option>
+                                    <option value="Robert Lee">Robert Lee</option>
+                                    <option value="Stephen Nelson">Stephen Nelson</option>
+                                </select>
+                            <% } else if (incident.Technician == 'James Archer') { %>
+                                <select class="form-select" id="techTextField" name="Technician" required>
+                                    <option value="<%= incident.Technician %>" selected><%= incident.Technician %></option>
+                                    <option value="Lana Reyes">Lana Reyes</option>
+                                    <option value="Aparna Ragavan">Aparna Ragavan</option>
+                                    <option value="Robert Lee">Robert Lee</option>
+                                    <option value="Stephen Nelson">Stephen Nelson</option>
+                                </select>
+                            <% } else if (incident.Technician == 'Aparna Ragavan') { %>
+                                <select class="form-select" id="techTextField" name="Technician" required>
+                                    <option value="<%= incident.Technician %>" selected><%= incident.Technician %></option>
+                                    <option value="Lana Reyes">Lana Reyes</option>
+                                    <option value="James Archer">James Archer</option>
+                                    <option value="Robert Lee">Robert Lee</option>
+                                    <option value="Stephen Nelson">Stephen Nelson</option>
+                                </select>
+                            <% } else if (incident.Technician == 'Robert Lee') { %>
+                                <select class="form-select" id="techTextField" name="Technician" required>
+                                    <option value="<%= incident.Technician %>" selected><%= incident.Technician %></option>
+                                    <option value="Lana Reyes">Lana Reyes</option>
+                                    <option value="James Archer">James Archer</option>
+                                    <option value="Aparna Ragavan">Aparna Ragavan</option>
+                                    <option value="Stephen Nelson">Stephen Nelson</option>
+                                </select>
+                            <% } else { %>
+                                <select class="form-select" id="techTextField" name="Technician" required>
+                                    <option value="<%= incident.Technician %>" selected><%= incident.Technician %></option>
+                                    <option value="Lana Reyes">Lana Reyes</option>
+                                    <option value="James Archer">James Archer</option>
+                                    <option value="Aparna Ragavan">Aparna Ragavan</option>
+                                    <option value="Robert Lee">Robert Lee</option>
+                                </select>
+                            <% } %>
+                        <% } %>                        
+                    <% } else { %>
+                        <label for="priorityTextField">Priority</label>
+                        <select class="form-select" id="techTextField" name="Technician" required>
+                            <option value="Unassigned" selected>--Open to select a technician--</option>
+                            <option value="Lana Reyes">Lana Reyes</option>
+                            <option value="James Archer">James Archer</option>
+                            <option value="Aparna Ragavan">Aparna Ragavan</option>
+                            <option value="Robert Lee">Robert Lee</option>
+                            <option value="Stephen Nelson">Stephen Nelson</option>
+                        </select>
+                    <% } %>        
+                </div>
+                
+                <div class="form-group mt-3">
+                    <label for="dateTextField">Date</label>
+                    <input type="text" class="form-control"
+                        id="dateTextField"
+                        placeholder="Enter the CreatedDate"
+                        name="CreatedDate" 
+                        value="<%= incident.CreatedDate %>"
+                        disabled readonly>
+                </div>
+                
+                <div class="mt-3 mb-5 pb-5 text-center">
+                    <% if (title == "Edit Incident Report") { %>
+                        
+                        <% if (incident.Status == 'Closed') { %>
+                            <a href="/incident/audit/<%= incident._id %>" class="btn btn-success">
+                                <i class="fas fa-external-link-alt"></i>
+                                Audit Trail
+                            </a>
+                            
+                            <a href="/incident/list" class="btn btn-warning">
+                                <i class="fas fa-undo"></i> 
+                                Cancel
+                            </a>
+                        <% } else { %>
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-edit"></i> 
+                                Submit
+                            </button>
+    
+                            <a href="/incident/audit/<%= incident._id %>" class="btn btn-success">
+                                <i class="fas fa-external-link-alt"></i>
+                                Audit Trail
+                            </a>
+                            
+                            <a href="/incident/list" class="btn btn-warning">
+                                <i class="fas fa-undo"></i> 
+                                Cancel
+                            </a>
+                        <% } %>
+
+                    <% } else { %>
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-edit"></i> 
+                            Submit
+                        </button>
+                        
+                        <a href="/incident/list" class="btn btn-warning">
+                            <i class="fas fa-undo"></i> 
+                            Cancel
+                        </a>
+                    <% } %>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include ../partials/footer.ejs %>

@@ -1,0 +1,95 @@
+<!--
+  Student ID: 301145757 , 301143620 , 301173877 , 301178658 , 301182897 , 300977318
+  Web App Name: Runtime
+  Description: An Incident Management Application
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+  <link rel='stylesheet' href='/@fortawesome/fontawesome-free/css/all.min.css' />
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body class="bg-light text-light">
+  <!-- Main Nav bar  -->  
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <img src="/assets/images/team_logo.png" alt="logo">
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav ms-auto mb-2">
+          <ul class="navbar-nav h5">
+
+            <li class="nav-item">
+              <% if (title == "Home") { %>
+                <a class="nav-link active" href="/">
+              <% } else { %>
+                <a class="nav-link" href="/">
+              <% } %>            
+                <i class="fas fa-home"></i> Home </a>
+              </a>
+            </li>  
+
+            <li class="nav-item">
+              <% if (title == "Incident Dashboard") { %>
+                <a class="nav-link active" href="incident/list">
+              <% } else { %>
+                <a class="nav-link" href="incident/list">
+              <% } %>            
+                <i class="fas fa-th-list"></i>  Incident Dashboard </a>
+              </a>
+            </li>   
+            
+            <li class="nav-item">
+              <% if(typeof username == 'string' && username){ %>
+                <div class="dropdown">
+                  
+                  <button class="btn" 
+                    style="font-weight: bold;"
+                    type="button" 
+                    id="dropdownMenuButton1" 
+                    data-bs-toggle="dropdown" 
+                    aria-expanded="false">
+                    <i class="fas fa-lg fa-user text-light"></i> 
+                    <strong class="text-light h5">Hello, <%= username %></strong>
+                  </button>
+
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li class="nav-item">
+                      <a class="dropdown-item" href="/settings/<%= user._id %>" class="nav-link">
+                        <i class="fas fa-cogs"></i>
+                        Settings
+                      </a>
+                    </li>
+
+                    <li class="nav-item">
+                      <a class="dropdown-item" href="/logout" class="nav-link">
+                        <i class="fas fa-lg fa-sign-out-alt"></i> 
+                        Logout
+                      </a>
+                    </li>
+                  </ul>
+
+                </div>
+              <% } else {%>
+                <li class="nav-item"><a href="/login" class="nav-link">
+                  <i class="i fas fa-lg fa-sign-in-alt"></i> Login</a></li>
+              <% } %>
+            </li>  
+
+          </ul>
+        </ul>
+      </div>
+    </div>
+  </nav>

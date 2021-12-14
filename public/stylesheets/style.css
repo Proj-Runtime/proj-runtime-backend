@@ -1,0 +1,78 @@
+/* 
+  Student ID: 301145757 , 301143620 , 301173877 , 301178658 , 301182897 , 300977318
+  Web App Name: Runtime
+  Description: An Incident Management Application
+*/
+
+html, body {
+  width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100 vh;
+}
+
+body {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+  
+.row {
+  padding: 3rem;
+  height: 400px;
+}
+
+#list{
+  float: right;
+}
+
+#create{
+  padding: 3rem;
+  height: 500;
+  text-align: center;
+}
+
+a{
+  text-decoration: none;
+}
+
+.footer {
+  flex: 0 0 50 px; /*or just height:50px;*/
+  margin-top: auto;
+  width: 100%;
+  background-color: #f5f5f5;
+}
+
+.flash{
+  color: red;
+}
+
+.table-hover tbody tr:hover td {
+  background-color: rgb(252, 244, 232);
+}
+
+.fontSizeHead {
+  font-size: 16px;
+}
+
+.fontSizeBody {
+  font-size: 14px;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+  margin-top: 0; 
+}

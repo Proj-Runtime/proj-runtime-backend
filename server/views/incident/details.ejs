@@ -1,0 +1,56 @@
+<!--
+  Student ID: 301145757 , 301143620 , 301173877 , 301178658 , 301182897 , 300977318
+  Web App Name: Runtime
+  Description: An Incident Management Application
+-->
+
+<%- include ../partials/header.ejs %>
+
+<!-- Content for the Add_Edit page -->
+<div class="container text-center pt-5 pb-3">
+    <div class="row">
+        <div class="offset-md-3 col-md-6">
+            <h1><%= title %></h1>
+
+                <div class="form-group">
+                    <label for="descTextField">Description</label>
+                    <strong><%= incident.Description %></strong>
+                </div>
+                <div class="form-group">
+                    <label for="priorityTextField">Priority</label>
+                    <strong><%= incident.Priority %></strong>
+                </div>
+                <div class="form-group">
+                    <label for="narTextField">Narrative</label>
+                    <strong>$<%= incident.Narrative %></strong>                    
+                </div>
+                <div class="form-group">
+                    <label for="requestTextField">Requester Name</label>
+                    <strong><%= incident.RequesterName %></strong>
+                </div>
+                <div class="form-group">
+                    <label for="techTextField">Technician</label>
+                    <strong><%= incident.Technician %></strong>
+                </div>
+                <div class="form-group">
+                    <label for="statTextField">Status</label>
+                    <strong><%= incident.Status %></strong>
+                </div>
+                <div class="form-group">
+                    <label for="dateTextField">CreatedDate</label>
+                    <strong><%= incident.CreatedDate %></strong>
+                </div>
+                <br />
+                
+                <a href="/incident/list" class="btn btn-warning">
+                    <i class="fas fa-undo"></i> 
+                    Cancel
+                </a>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<%- include ../partials/footer.ejs %>
