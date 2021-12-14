@@ -63,6 +63,7 @@ function getErrorMessage(err) {
 // }
 
 // Process the Login page
+
 module.exports.processLoginPage = (req, res, next) => {
 
   passport.authenticate(
@@ -80,7 +81,7 @@ module.exports.processLoginPage = (req, res, next) => {
             if (error) return next(error);
 
             const body = { _id: user._id, email: user.email };
-            const token = jwt.sign({ user: body }, config.SecretOrKey);
+            const token = jwt.sign({ user: body }, DB.SecretOrKey);
 
             return res.json({ success: true, token: token });
           }

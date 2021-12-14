@@ -22,12 +22,13 @@ let passport = require('passport');
 // let flash = require('connect-flash');
 let errorHandler = require("./error-handler");
 
+
 //Database setup
 let mongoose = require('mongoose');
 let dbURI = require('./db');
 
 // Connect to the Database
-mongoose.connect(dbURI.AtlasDB, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(dbURI.AtlasDB,{ useNewUrlParser: true });
 
 let mongoDB = mongoose.connection;
 mongoDB.on('error', console.error.bind(console, 'Connection Error:'));
@@ -64,7 +65,7 @@ app.use(express.urlencoded({ extended: false }));
 // }));
 
 // initialize flash
-app.use(flash());
+// app.use(flash());
 
 //initialize passport
 app.use(passport.initialize());

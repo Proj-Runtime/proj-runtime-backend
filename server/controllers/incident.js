@@ -4,13 +4,14 @@
   Description: An Incident Management Application
 */
 
-let express = require('express');
-let router = express.Router();
-let mongoose = require('mongoose');
-let jwt = require('jsonwebtoken');
+// let express = require('express');
+// let router = express.Router();
+// let mongoose = require('mongoose');
+// let jwt = require('jsonwebtoken');
 
 // create a reference to the model
 let Incident = require('../models/incident');
+
 
 function getErrorMessage(err) {
     if (err.errors) {
@@ -21,6 +22,7 @@ function getErrorMessage(err) {
         return 'Unknown server error';
     }
 };
+
 
 // Gets all incidents from the Database and renders the page to list all incidents.
 module.exports.incidentList = function(req, res, next) {  
@@ -51,6 +53,7 @@ module.exports.incidentList = function(req, res, next) {
         // }
     });
 }
+
 
 // Gets a incident by id and renders the details page.
 // module.exports.details = (req, res, next) => {
@@ -88,6 +91,7 @@ module.exports.incidentList = function(req, res, next) {
 //     res.join({success: true, msg: 'Successfully Displayed Add Page', incident:newIncident});
 // }
 
+
 exports.incidentByID = function (req, res, next) {
 
     let id = req.params.id;
@@ -102,9 +106,11 @@ exports.incidentByID = function (req, res, next) {
     });
 };
 
+
 exports.getInventory = function (req, res) {
     res.status(200).json(req.item);
 };
+
 
 // Processes the data submitted from the Add form to create a new incident
 module.exports.processAddPage = (req, res, next) => {
@@ -121,6 +127,8 @@ module.exports.processAddPage = (req, res, next) => {
     //     CreatedDate: req.body.CreatedDate,
     //     TimeStamped: [ req.body.CreatedDate ]
     // });
+
+    let newIncident = new Incident(req.body);
 
     let currentDate = new Date();
     let day = currentDate.getDate().toString();
@@ -148,6 +156,7 @@ module.exports.processAddPage = (req, res, next) => {
             let createdStr = "Created at " + Math.round(new Date().getTime()/1000) +"; ";
             newIncident.narrativeLatest = createdStr;
             newIncident.narrative = createdStr;
+            newIncident.TimeStamped = new Date();
 
             Inventory.create(newIncident, (err, incident) => {
                 if (err) {
@@ -207,6 +216,7 @@ module.exports.processAddPage = (req, res, next) => {
 // }
 
 // Processes the data submitted from the Edit form to update a incident
+
 module.exports.processEditPage = (req, res, next) => {
     let id = req.params.id
     // update timestamped for every incident modification
@@ -243,7 +253,7 @@ module.exports.processEditPage = (req, res, next) => {
             // refresh the Incident list
             // res.redirect('/incident/list');
             // res.join({success: true, msg: 'Successfully Edited Incident', incident: updatedIncident});
-            return res.status(200).json(updatedItem);
+            return res.status(200).json(updatedIncident);
         }
     });
 }
@@ -276,6 +286,7 @@ module.exports.processEditPage = (req, res, next) => {
 
 
 // Deletes an Incident based on its id.
+
 module.exports.performDelete = (req, res, next) => {
     let id = req.params.id;
 

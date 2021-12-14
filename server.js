@@ -15,6 +15,8 @@
 var app = require('./server/config/app');
 var debug = require('debug')('week03-009:server');
 var http = require('http');
+// const configurePassport = require('./config/passport');
+
 
 /**
  * Get port from environment and store in Express.
@@ -22,6 +24,8 @@ var http = require('http');
 
 var port = normalizePort(process.env.PORT || '4000');
 app.set('port', port);
+
+// const passport = configurePassport();
 
 /**
  * Create HTTP server.

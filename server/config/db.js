@@ -8,6 +8,6 @@ module.exports = {
   // "AtlasDB": "mongodb://localhost/incident_list",
   // "AtlasDB":"mongodb+srv://admin:mx9nxX3to2M1lFDO@runtime.efacg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
   // "Secret": 'SomeSecret'
-  "AtlasDB": process.env.AtlasDB,
+  "AtlasDB": process.env.ATLASDB,
   "SecretOrKey": process.env.SECRETKEY
 }
